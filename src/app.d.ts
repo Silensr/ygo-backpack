@@ -6,4 +6,14 @@ declare namespace App {
 	// interface PageData {}
 	// interface Error {}
 	// interface Platform {}
+
+	namespace Lucia {
+		type Auth = import('$lib/server/lucia').Auth
+		type DatabaseUserAttributes = {
+			discord_id: string
+		}
+		type DatabaseUserAttributes = {}
+	}
 }
+
+export {}
