@@ -4,8 +4,7 @@ import { PrismaClient } from '@prisma/client'
 import { lucia } from 'lucia'
 import { sveltekit } from 'lucia/middleware'
 import { discord } from '@lucia-auth/oauth/providers'
-import { DISCORD_APP_ID, DISCORD_APP_SECRET } from '$env/static/private'
-import { hostname } from 'os'
+import { DISCORD_ID, DISCORD_SECRET, CALLBACK_URL } from '$env/static/private'
 
 const client = new PrismaClient()
 
@@ -22,8 +21,8 @@ export const auth = lucia({
 })
 
 export const discordAuth = discord(auth, {
-	clientId: DISCORD_APP_ID,
-	clientSecret: DISCORD_APP_SECRET,
-	redirectUri: hostname() + '/login/discord/callback',
-	scope: ['identify', 'guilds', 'guilds.member.read']
+	clientId: DISCORD_ID,
+	clientSecret: DISCORD_SECRET,
+	redirectUri: CALLBACK_URL,
+	scope: ['guilds', 'guilds.members.read']
 })
